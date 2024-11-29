@@ -31,6 +31,7 @@ myapp/
 ---
 
 ## **Features**
+
 - **FastAPI Framework**: Lightweight Python web framework for building APIs.
 - **Automated CI/CD**: Updates deployed automatically on code changes in GitHub.
 - **AWS Integration**:
@@ -42,6 +43,7 @@ myapp/
 ## **Setup**
 
 ### **1. Prerequisites**
+
 - **For Local Development**:
   - Python 3.8 or later installed.
   - `pip` installed for dependency management.
@@ -57,6 +59,7 @@ myapp/
 ## **Local Development**
 
 ### **Run Locally**
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/BharathShanmugam/CI-CD-CodePipeline-AWS.git
@@ -77,6 +80,7 @@ myapp/
 ## **Deployment on EC2 Server**
 
 ### **Steps for Automated Deployment**
+
 1. **Push Changes to GitHub**:
    - Any changes in the repository (e.g., `requirements.txt` or source code) are detected by **AWS CodePipeline**.
 2. **CodePipeline Workflow**:
@@ -85,6 +89,7 @@ myapp/
    - Installs dependencies from `requirements.txt` and restarts the FastAPI application.
 
 ### **Access the Deployed Application**
+
 - Once deployed, the application runs on the EC2 instance.
 - Access it via the public IP or domain of the EC2 server:
   ```
@@ -97,8 +102,11 @@ myapp/
 ## **Deployment Configuration**
 
 ### **CodeDeploy Setup**
+
 #### **`appspec.yml`**
+
 Defines the deployment process for AWS CodeDeploy:
+
 ```yaml
 version: 0.0
 os: linux
@@ -117,7 +125,9 @@ hooks:
 ```
 
 ### **Scripts**
+
 #### **`scripts/install_dependencies.sh`**
+
 ```bash
 #!/bin/bash
 echo "Installing dependencies..."
@@ -126,6 +136,7 @@ pip install -r requirements.txt
 ```
 
 #### **`scripts/restart_server.sh`**
+
 ```bash
 #!/bin/bash
 echo "Restarting FastAPI server..."
@@ -138,11 +149,13 @@ nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 &
 ## **AWS Setup**
 
 ### **CodePipeline**
+
 1. Create a new pipeline in AWS CodePipeline.
 2. **Source Stage**: Connect the pipeline to your GitHub repository.
 3. **Deploy Stage**: Add CodeDeploy to deploy the application to an EC2 instance.
 
 ### **CodeDeploy**
+
 1. Create a CodeDeploy application.
 2. Create a deployment group:
    - Attach an IAM role with `AmazonEC2RoleforAWSCodeDeploy`.
@@ -164,7 +177,9 @@ nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 &
 ## **Testing**
 
 ### **Run Tests**
+
 Unit tests are located in the `tests` folder:
+
 ```bash
 pytest tests/
 ```
@@ -172,7 +187,9 @@ pytest tests/
 ---
 
 ## **Troubleshooting**
+
 1. **Deployment Fails**:
+
    - Check logs in the AWS CodeDeploy Console.
    - SSH into the EC2 instance and verify logs in `/var/log/aws/codedeploy-agent/`.
 
@@ -189,17 +206,11 @@ pytest tests/
 ---
 
 ## **Contributors**
+
 - **Bharath Shanmugam**: Initial setup and development.
 
 ---
 
 ## **Support**
+
 For any issues, please open a GitHub issue in this repository.
-
----
-
-### **Final Notes**
-1. Replace `<your-username>` and `<your-repo-name>` with your actual GitHub details.
-2. Follow the steps precisely to ensure a smooth CI/CD pipeline setup.
-
-Let me know if you need additional adjustments or clarification!
